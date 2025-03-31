@@ -1,5 +1,6 @@
 package com.giselle.imc_app
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -30,15 +31,18 @@ class HomeActivity : AppCompatActivity() {
             val pesoValue = peso.toDouble()
             val alturaValue = altura.toDouble()
             val imcResult = pesoValue/(alturaValue*alturaValue)
-            val imcResultText = "Seu IMC é: %.2f".format(imcResult)
-            Toast.makeText(this, imcResultText, Toast.LENGTH_SHORT).show()
+
+            val intent = Intent(this@HomeActivity, ImcDetailsActivity::class.java)
+            intent.putExtra("IMC_RESULT", imcResult)
+            intent.putExtra("IMC_WEIGHT", pesoValue)
+            intent.putExtra("IMC_HEIGHT", alturaValue)
+            startActivity(intent)
         } else {
             Toast.makeText(this, "Preencha um valor válido", Toast.LENGTH_SHORT).show()
         }
 
 
-//        val intent = Intent(this, ImcDetailsActivity::class.java)
-//        startActivity(intent)
+
     }
 
 
